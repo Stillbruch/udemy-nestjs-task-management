@@ -9,6 +9,7 @@
             "request": "launch",
             "name": "Launch via NPM",
             "runtimeExecutable": "npm",
+            "preLaunchTask": "tsc: build - tsconfig.json",
             "runtimeArgs": [
                 "run-script",
                 "start:debug"
