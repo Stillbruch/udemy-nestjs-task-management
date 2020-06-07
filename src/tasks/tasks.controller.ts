@@ -10,7 +10,7 @@ export class TasksController {
     constructor(private tasksService: TasksService) {}
 
     @Get()
-    getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
+    getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): Task[] {
         if (Object.keys(filterDto).length) {
             return this.tasksService.getTasksWithFilters(filterDto);
         }
@@ -36,7 +36,7 @@ export class TasksController {
     }
 
     @Patch(':id/status')
-    updateTaskStatus(@Param('id') id: string, @Body('status', new TaskStatusValidationPipe()) status: TaskStatus): Task {
+    updateTaskStatus(@Param('id') id: string, @Body('status', TaskStatusValidationPipe) status: TaskStatus): Task {
         return this.tasksService.updateTaskStatus(id, status);
     }
 }
