@@ -9,15 +9,16 @@
             "request": "launch",
             "name": "Launch via NPM",
             "runtimeExecutable": "npm",
-            "preLaunchTask": "tsc: build - tsconfig.json",
+            // "preLaunchTask": "tsc: build - tsconfig.json",
             "runtimeArgs": [
-                "run-script",
+                "run",
                 "start:debug"
             ],
-            "port": 9229,
             "skipFiles": [
                 "<node_internals>/**"
-            ]
-        }
+            ],
+            "port": 9229,
+            "timeout": 20000
+        },
     ]
 }
