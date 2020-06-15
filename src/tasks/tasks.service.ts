@@ -16,7 +16,7 @@ export class TasksService {
     }
 
     async getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
-        return await this.taskRepository.getTasks(filterDto);
+        return this.taskRepository.getTasks(filterDto);
     }
 
     async getTaskById(id: number): Promise<Task> {
@@ -36,6 +36,10 @@ export class TasksService {
         if (result.affected === 0) {
             throw new NotFoundException(`Task with ID ${id} not found.`);
         }
+    }
+
+    async deleteAllTasks(): Promise<void> {
+        await this.taskRepository.clear();
     }
 
     async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
