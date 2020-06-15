@@ -17,6 +17,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
+            "restart": true,
             "port": 9229,
             "timeout": 20000
         },

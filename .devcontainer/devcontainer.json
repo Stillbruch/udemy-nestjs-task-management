@@ -21,7 +21,7 @@
 		"visualstudioexptteam.vscodeintellicode"
 	],
 
-	"forwardPorts": [ 3000 ],
+	"forwardPorts": [ 3000, 1234 ],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -30,7 +30,7 @@
 	// "shutdownAction": "none",
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install -g @nestjs/cli tslint typescript",
+	"postCreateCommand": "npm install -g @nestjs/cli tslint typescript @nestjs/typeorm typeorm pg",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "node"
