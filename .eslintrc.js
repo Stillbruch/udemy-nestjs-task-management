@@ -21,6 +21,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'semi': 'off',
-    '@typescript-eslint/semi': ["warning"]
+    '@typescript-eslint/semi': 1
   },
 };
