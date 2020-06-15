@@ -5,6 +5,7 @@ import { TaskRepository } from './task.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enum';
+import { Like } from 'typeorm';
 
 @Injectable()
 export class TasksService {
@@ -15,27 +16,24 @@ export class TasksService {
 
     }
 
+    async getAllTasks(): Promise<Task[]> {
+        return await this.taskRepository.find();
+    }
 
-    // private tasks: Task[] = [];
-
-    // getAllTasks(): Task[] {
-    //     return this.tasks;
-    // }
-
-    // getTasksWithFilters(filterDto: GetTasksFilterDto): Task[] {
-    //     const { status, search } = filterDto;
-    //     let tasks = this.getAllTasks();
-    //     if (status) {
-    //         tasks = tasks.filter(task => task.status === status);
-    //     }
-    //     if (search) {
-    //         tasks = tasks.filter(task => 
-    //             task.title.includes(search) ||
-    //             task.description.includes(search)
-    //         );
-    //     }
-    //     return tasks;
-    // }
+    async getTasksWithFilters(filterDto: GetTasksFilterDto): Promise<Task[]> {
+        const { status, search } = filterDto;
+        let tasks = await this.getAllTasks();
+        if (status) {
+            tasks = tasks.filter(task => task.status === status);
+        }
+        if (search) {
+            tasks = tasks.filter(task => 
+                task.title.includes(search) ||
+                task.description.includes(search)
+            );
+        }
+        return tasks;
+    }
 
     async getTaskById(id: number): Promise<Task> {
         const found = await this.taskRepository.findOne(id);
@@ -57,10 +55,12 @@ export class TasksService {
         return task;
     }
 
-    // deleteTask(id: string): Task[] {
-    //     this.tasks = this.tasks.filter(task => task.id !== this.getTaskById(id).id);
-    //     return this.getAllTasks();
-    // }
+    async deleteTask(id: number): Promise<void> {
+        const result = await this.taskRepository.delete(id);
+        if (result.affected === 0) {
+            throw new NotFoundException(`Task with ID ${id} not found.`);
+        }
+    }
 
     // updateTaskStatus(id: string, status: TaskStatus): Task {
     //     this.getTaskById(id).status = status;
