@@ -21,7 +21,7 @@
 		"visualstudioexptteam.vscodeintellicode"
 	],
 
-	"forwardPorts": [ 3000 ],
+	"forwardPorts": [ 3000, 1234 ],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
